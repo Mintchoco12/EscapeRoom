@@ -45,7 +45,6 @@ public class Interactables : MonoBehaviour
         }
     }
 
-
     private void OnTriggerExit(Collider other)
     {
         //If player exits zone
@@ -56,6 +55,5 @@ public class Interactables : MonoBehaviour
             textToDisplay.SetActive(false);
         }
     }
-
 }
 
