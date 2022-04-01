@@ -3,55 +3,59 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Animations : MonoBehaviour
-{
-    [SerializeField] private GameObject interactable;
-    [SerializeField] private GameObject chestLock;
-    [SerializeField] private GameObject key;
-    [SerializeField] private GameObject textToDisplay;
+{ 
+    private Chests chest;
+    private PickUpItem pickUp;
 
-    private bool[] isOpen = new bool[3];
-    [SerializeField] private bool keyInHand;
+    [SerializeField] private GameObject interactable;
+    [SerializeField] private GameObject textToDisplay;
+    [SerializeField] private GameObject key;
+    [SerializeField] private GameObject lockChest;
+
+    public bool[] isOpen = new bool[4];
     private bool playerInZone;
     
     private void Start()
     {
+        chest = lockChest.GetComponent<Chests>();
+        pickUp = key.GetComponent<PickUpItem>();
+
         for (int i = 0; i < isOpen.Length; i++)
         {
             isOpen[i] = false;
         }
-        keyInHand = false;
         playerInZone = false;
         textToDisplay.SetActive(false);
     }
 
     private void Update()
     {
+        //Open door
         if (playerInZone && isOpen[0] == false && isOpen[1] && Input.GetKeyDown(KeyCode.E))
         {
             gameObject.GetComponent<Animator>().Play("Button");
             StartCoroutine(OpenDoor());
         }
 
+        //Open first chest
         if (playerInZone && isOpen[1] == false && Input.GetKeyDown(KeyCode.E))
         {
             interactable.GetComponent<Animator>().Play("Chest");
-            isOpen[1] = true;
-            if (isOpen[1])
-            {
-                keyInHand = true;
-            }
+            chest.OpenFirstChest();
         }
 
-        if (playerInZone && keyInHand == true && Input.GetMouseButtonDown(0))
+        //Open lock
+        if (playerInZone && pickUp.equipped && Input.GetMouseButtonDown(0))
         {
-            Destroy(chestLock);
-            Destroy(key);
-            isOpen[2] = true;
+            chest.UnlockLock();
+            print("test");
         }
 
-        if (playerInZone && isOpen[2] && Input.GetKeyDown(KeyCode.E))
+        //Open second chest
+        if (playerInZone && chest.lockUnlocked && Input.GetKeyDown(KeyCode.E))
         {
             interactable.GetComponent<Animator>().Play("Chest"); 
+            chest.OpenSecondChest();
         }
     }
 
