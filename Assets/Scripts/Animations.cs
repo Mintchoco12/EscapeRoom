@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class Animations : MonoBehaviour
 { 
+    private Manager manager;
     private Chests chest;
     private PickUpItem pickUp;
-
+        
     [SerializeField] private GameObject interactable;
     [SerializeField] private GameObject textToDisplay;
     [SerializeField] private GameObject key;
     [SerializeField] private GameObject lockChest;
 
-    public bool[] isOpen = new bool[4];
+    //public bool[] isOpen = new bool[4];
     private bool playerInZone;
     
     private void Start()
     {
+        manager = GetComponent<Manager>();
         chest = lockChest.GetComponent<Chests>();
         pickUp = key.GetComponent<PickUpItem>();
 
-        for (int i = 0; i < isOpen.Length; i++)
+        for (int i = 0; i < manager.stage.Length; i++)
         {
-            isOpen[i] = false;
+            manager.stage[i] = false;
         }
         playerInZone = false;
         textToDisplay.SetActive(false);
@@ -31,14 +33,14 @@ public class Animations : MonoBehaviour
     private void Update()
     {
         //Open door
-        if (playerInZone && isOpen[0] == false && isOpen[1] && Input.GetKeyDown(KeyCode.E))
+        if (playerInZone && manager.stage[0] == false && manager.stage[1] && Input.GetKeyDown(KeyCode.E))
         {
             gameObject.GetComponent<Animator>().Play("Button");
             StartCoroutine(OpenDoor());
         }
 
         //Open first chest
-        if (playerInZone && isOpen[1] == false && Input.GetKeyDown(KeyCode.E))
+        if (playerInZone && manager.stage[1] == false && Input.GetKeyDown(KeyCode.E))
         {
             interactable.GetComponent<Animator>().Play("Chest");
             chest.OpenFirstChest();
@@ -63,14 +65,14 @@ public class Animations : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        isOpen[0] = true;
+        manager.stage[0] = true;
         interactable.GetComponent<Animator>().Play("Door1");
     }
 
     private void OnTriggerEnter(Collider other)
     {
         //If player is in zone
-        if (other.gameObject.tag == "Player" && isOpen[0] == false)
+        if (other.gameObject.tag == "Player" && manager.stage[0] == false)
         {
             //Show text
             textToDisplay.SetActive(true);

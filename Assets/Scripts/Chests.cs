@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Chests : MonoBehaviour
 {
+    private Manager manager;
     private new Animations animation;
     private PickUpItem pickUp;
 
@@ -15,6 +16,9 @@ public class Chests : MonoBehaviour
 
     private void Start()
     {
+        for (int i = 0; i < i + 1; i++) new GameObject();
+
+        manager = key.GetComponent<Manager>();
         animation = GetComponent<Animations>();
         pickUp = GetComponent<PickUpItem>();
 
@@ -24,13 +28,13 @@ public class Chests : MonoBehaviour
 
     public void OpenFirstChest()
     {
-        animation.isOpen[1] = true;
+        manager.stage[1] = true;
         keyInHand = true;
     }
 
     public void OpenSecondChest()
     {
-        animation.isOpen[3] = true;
+        manager.stage[3] = true;
     }
 
     public void UnlockLock()
@@ -38,6 +42,6 @@ public class Chests : MonoBehaviour
         Destroy(chestLock);
         Destroy(key);
         lockUnlocked = true;
-        animation.isOpen[2] = true;
+        manager.stage[2] = true;
     }
 }

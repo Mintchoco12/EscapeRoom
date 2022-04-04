@@ -7255,21 +7255,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1659166760720322233, guid: 944bff624466e4242a3377fba75ddaf3, type: 3}
   m_PrefabInstance: {fileID: 1343712500}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &694899136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 694899135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81b304944f028c2408e6233846bd1785, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chestLock: {fileID: 1307865762}
-  key: {fileID: 1307865762}
-  keyInHand: 0
 --- !u!114 &694899140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7284,6 +7269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactable: {fileID: 626725556}
   textToDisplay: {fileID: 624254587}
+  key: {fileID: 1416029717}
+  lockChest: {fileID: 1206264090}
   isOpen: 000000
 --- !u!65 &694899141
 BoxCollider:
@@ -7298,6 +7285,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.53, y: 1.17, z: 1.01}
   m_Center: {x: 0, y: 0.23148271, z: 0.012360275}
+--- !u!114 &694899142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694899135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b304944f028c2408e6233846bd1785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chestLock: {fileID: 2028359405}
+  key: {fileID: 1416029717}
+  lockUnlocked: 0
+  keyInHand: 0
 --- !u!4 &700773411 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
@@ -12804,21 +12807,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1659166760720322233, guid: 944bff624466e4242a3377fba75ddaf3, type: 3}
   m_PrefabInstance: {fileID: 1377290922}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1206264091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1206264090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81b304944f028c2408e6233846bd1785, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chestLock: {fileID: 2028359405}
-  key: {fileID: 1416029717}
-  keyInHand: 0
 --- !u!114 &1206264095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12833,6 +12821,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactable: {fileID: 517561232}
   textToDisplay: {fileID: 624254587}
+  key: {fileID: 1416029717}
+  lockChest: {fileID: 1206264090}
   isOpen: 000000
 --- !u!65 &1206264096
 BoxCollider:
@@ -12847,6 +12837,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.53, y: 1.17, z: 1.01}
   m_Center: {x: 0, y: 0.23148271, z: 0.012360278}
+--- !u!114 &1206264097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206264090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b304944f028c2408e6233846bd1785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chestLock: {fileID: 2028359405}
+  key: {fileID: 1416029717}
+  lockUnlocked: 0
+  keyInHand: 0
 --- !u!1001 &1222054479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22247,6 +22253,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactable: {fileID: 231781640}
   textToDisplay: {fileID: 624254587}
+  key: {fileID: 1416029717}
+  lockChest: {fileID: 694899135}
   isOpen: 000000
 --- !u!65 &2039451173
 BoxCollider:
