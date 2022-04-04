@@ -3,29 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Animations : MonoBehaviour
-{ 
-    private Manager manager;
-    private Chests chest;
-    private PickUpItem pickUp;
-        
+{       
+    [SerializeField] private Manager manager;
     [SerializeField] private GameObject interactable;
     [SerializeField] private GameObject textToDisplay;
-    [SerializeField] private GameObject key;
-    [SerializeField] private GameObject lockChest;
 
-    //public bool[] isOpen = new bool[4];
     private bool playerInZone;
     
     private void Start()
     {
-        manager = GetComponent<Manager>();
-        chest = lockChest.GetComponent<Chests>();
-        pickUp = key.GetComponent<PickUpItem>();
-
-        for (int i = 0; i < manager.stage.Length; i++)
-        {
-            manager.stage[i] = false;
-        }
         playerInZone = false;
         textToDisplay.SetActive(false);
     }
@@ -33,31 +19,31 @@ public class Animations : MonoBehaviour
     private void Update()
     {
         //Open door
-        if (playerInZone && manager.stage[0] == false && manager.stage[1] && Input.GetKeyDown(KeyCode.E))
+        if (playerInZone && manager.stage[0] == false && Input.GetKeyDown(KeyCode.E))
         {
-            gameObject.GetComponent<Animator>().Play("Button");
+            interactable.GetComponent<Animator>().Play("Button");
             StartCoroutine(OpenDoor());
         }
 
-        //Open first chest
-        if (playerInZone && manager.stage[1] == false && Input.GetKeyDown(KeyCode.E))
-        {
-            interactable.GetComponent<Animator>().Play("Chest");
-            chest.OpenFirstChest();
-        }
-
         //Open lock
-        if (playerInZone && pickUp.equipped && Input.GetMouseButtonDown(0))
+        if (playerInZone && Input.GetMouseButtonDown(0))
         {
-            chest.UnlockLock();
+            manager.UnlockLock();
             print("test");
         }
 
-        //Open second chest
-        if (playerInZone && chest.lockUnlocked && Input.GetKeyDown(KeyCode.E))
+        ////Open lock
+        //if (playerInZone && manager.keyInHand && Input.GetMouseButtonDown(0))
+        //{
+        //    manager.UnlockLock();
+        //    print("test");
+        //}
+
+        //Open first chest
+        if (playerInZone && manager.stage[1] && Input.GetKeyDown(KeyCode.E))
         {
-            interactable.GetComponent<Animator>().Play("Chest"); 
-            chest.OpenSecondChest();
+            interactable.GetComponent<Animator>().Play("Chest");
+            manager.OpenChest();
         }
     }
 
@@ -66,7 +52,7 @@ public class Animations : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         manager.stage[0] = true;
-        interactable.GetComponent<Animator>().Play("Door1");
+        interactable.GetComponent<Animator>().Play("Door");
     }
 
     private void OnTriggerEnter(Collider other)
