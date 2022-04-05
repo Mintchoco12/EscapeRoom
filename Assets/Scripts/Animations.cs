@@ -45,6 +45,15 @@ public class Animations : MonoBehaviour
             interactable.GetComponent<Animator>().Play("Chest");
             manager.OpenChest();
         }
+
+        if (playerInZone && manager.leverOn == false && Input.GetKeyDown(KeyCode.E))           //if in zone and press F key
+        {
+            //gameObject.GetComponent<AudioSource>().Play();
+            gameObject.GetComponent<Animator>().Play("lever");
+            manager.leverOn = true;
+            StartCoroutine(SpawnBridge());
+
+        }
     }
 
     IEnumerator OpenDoor()
@@ -53,6 +62,14 @@ public class Animations : MonoBehaviour
 
         manager.stage[0] = true;
         interactable.GetComponent<Animator>().Play("Door");
+    }
+
+    IEnumerator SpawnBridge()
+    {
+        yield return new WaitForSeconds(0.8f);
+
+        manager.block.SetActive(!manager.block.activeSelf);
+
     }
 
     private void OnTriggerEnter(Collider other)

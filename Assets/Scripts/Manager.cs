@@ -5,10 +5,16 @@ using UnityEngine;
 public class Manager : MonoBehaviour
 {
     public List<GameObject> chestGameobjects = new List<GameObject>();
+    public GameObject block;
 
     public bool[] stage = new bool[3];
     public bool keyInHand;
     public bool chestUnlocked;
+
+    public bool leverOn;
+
+
+
 
     private void Start()
     {
@@ -17,6 +23,7 @@ public class Manager : MonoBehaviour
             stage[i] = false;
         }
         keyInHand = false;
+        leverOn = false;
         chestUnlocked = false;
     }
     public void UnlockLock()
