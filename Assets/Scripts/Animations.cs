@@ -51,7 +51,7 @@ public class Animations : MonoBehaviour
             //gameObject.GetComponent<AudioSource>().Play();
             gameObject.GetComponent<Animator>().Play("lever");
             manager.leverOn = true;
-            StartCoroutine(SpawnBridge());
+            StartCoroutine(SpawnPlatforms());
 
         }
     }
@@ -64,9 +64,9 @@ public class Animations : MonoBehaviour
         interactable.GetComponent<Animator>().Play("Door");
     }
 
-    IEnumerator SpawnBridge()
+    IEnumerator SpawnPlatforms()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.5f);
 
         manager.block.SetActive(!manager.block.activeSelf);
 
@@ -75,7 +75,7 @@ public class Animations : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //If player is in zone
-        if (other.gameObject.tag == "Player" && manager.stage[0] == false)
+        if (other.gameObject.tag == "Player")
         {
             //Show text
             textToDisplay.SetActive(true);
