@@ -10,20 +10,22 @@ public class Lever1 : MonoBehaviour
 
     public GameObject block;
 
+    private bool leverOn;
+
     private void Start()
     {
-
+        leverOn = false;
         PlayerInZone = false;                   //player not in zone       
         //txtToDisplay.SetActive(false);
     }
 
     private void Update()
     {
-        if (PlayerInZone && Input.GetKeyDown(KeyCode.E))           //if in zone and press F key
+        if (PlayerInZone && leverOn == false && Input.GetKeyDown(KeyCode.E))           //if in zone and press F key
         {
             //gameObject.GetComponent<AudioSource>().Play();
-            //gameObject.GetComponent<Animator>().Play("switch");
-
+            gameObject.GetComponent<Animator>().Play("lever");
+            leverOn = true;
             StartCoroutine(SpawnBridge());
         }
     }
