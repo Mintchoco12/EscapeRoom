@@ -77,7 +77,6 @@ public class PickUpItem : MonoBehaviour
         rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
         rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
 
-
         //Disable kinematic RigidBody and make BoxCollider normal
         rb.isKinematic = false;
         coll.isTrigger = false;
