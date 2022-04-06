@@ -19,9 +19,9 @@ public class Animations : MonoBehaviour
     private void Update()
     {
         //Open door
-        if (playerInZone && manager.stage[0] == false && Input.GetKeyDown(KeyCode.E))
+        if (playerInZone && manager.stage[2] && Input.GetKeyDown(KeyCode.E))
         {
-            interactable.GetComponent<Animator>().Play("Button");
+            gameObject.GetComponent<Animator>().Play("Button");
             StartCoroutine(OpenDoor());
         }
 
@@ -43,28 +43,35 @@ public class Animations : MonoBehaviour
         if (playerInZone && manager.stage[1] && Input.GetKeyDown(KeyCode.E))
         {
             interactable.GetComponent<Animator>().Play("Chest");
-            manager.OpenChest();
+            StartCoroutine(manager.OpenChest());
         }
 
-        if (playerInZone && manager.leverOn == false && Input.GetKeyDown(KeyCode.E))           //if in zone and press F key
+        //Bookshelf lever
+        if (playerInZone && manager.stage[2] && Input.GetKeyDown(KeyCode.E))
         {
-            //gameObject.GetComponent<AudioSource>().Play();
-            gameObject.GetComponent<Animator>().Play("lever");
-            manager.leverOn = true;
-            StartCoroutine(SpawnPlatforms());
-
+            gameObject.GetComponent<Animator>().Play("lever");  
+            interactable.GetComponent<Animator>().Play("Bookshelf");
         }
+
+        ////Parkour lever
+        //if (playerInZone && manager.leverOn == false && Input.GetKeyDown(KeyCode.E))           
+        //{
+        //    //gameObject.GetComponent<AudioSource>().Play();
+        //    gameObject.GetComponent<Animator>().Play("lever");
+        //    manager.leverOn = true;
+        //    StartCoroutine(SpawnPlatforms());
+
+        //}
     }
 
-    IEnumerator OpenDoor()
+    private IEnumerator OpenDoor()
     {
         yield return new WaitForSeconds(0.5f);
 
-        manager.stage[0] = true;
         interactable.GetComponent<Animator>().Play("Door");
     }
 
-    IEnumerator SpawnPlatforms()
+    private IEnumerator SpawnPlatforms()
     {
         yield return new WaitForSeconds(0.5f);
 

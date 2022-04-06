@@ -5,20 +5,17 @@ using UnityEngine;
 public class Manager : MonoBehaviour
 {
     public List<GameObject> chestGameobjects = new List<GameObject>();
+    public List<bool> stage = new List<bool>();
     public GameObject block;
 
-    public bool[] stage = new bool[3];
     public bool keyInHand;
     public bool chestUnlocked;
 
     public bool leverOn;
 
-
-
-
     private void Start()
     {
-        for (int i = 0; i < stage.Length; i++)
+        for (int i = 0; i < stage.Count; i++)
         {
             stage[i] = false;
         }
@@ -35,10 +32,10 @@ public class Manager : MonoBehaviour
         stage[1] = true;
     }
 
-    public void OpenChest()
+    public IEnumerator OpenChest()
     {
-        stage[2] = true;
-        keyInHand = true;
-    }
+        yield return new WaitForSeconds(1);
 
+        stage[2] = true;
+    }
 }

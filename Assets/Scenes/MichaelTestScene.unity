@@ -8827,28 +8827,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 34.43
       objectReference: {fileID: 0}
+    - target: {fileID: 64293212985207276, guid: 5aff92d86b7d0414eafac6008907e5f4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5aff92d86b7d0414eafac6008907e5f4, type: 3}
---- !u!1 &850256055 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1325315441100904, guid: 5aff92d86b7d0414eafac6008907e5f4, type: 3}
-  m_PrefabInstance: {fileID: 850256054}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &850256056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850256055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58ac4abcef2094246bed07c332c49d79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  interactable: {fileID: 0}
-  textToDisplay: {fileID: 0}
 --- !u!1 &850256057 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1201172822425790, guid: 5aff92d86b7d0414eafac6008907e5f4, type: 3}
@@ -8867,7 +8851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1418446064}
-  interactable: {fileID: 850256057}
+  interactable: {fileID: 1481208682}
   textToDisplay: {fileID: 624254587}
 --- !u!95 &850256059
 Animator:
@@ -8888,6 +8872,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &850256066
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850256057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.86875653, y: 1.21, z: 1.58}
+  m_Center: {x: -0.14437741, y: 0.15310486, z: -0.00000015223199}
 --- !u!1001 &851816079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15399,8 +15396,8 @@ MonoBehaviour:
   - {fileID: 1206264090}
   - {fileID: 2028359405}
   - {fileID: 1416029717}
-  block: {fileID: 1307865762}
   stage: 00000000
+  block: {fileID: 1307865762}
   keyInHand: 0
   chestUnlocked: 0
   leverOn: 0
@@ -20449,7 +20446,7 @@ GameObject:
   - component: {fileID: 1859129037}
   - component: {fileID: 1859129036}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
