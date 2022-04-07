@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PickUpItem : MonoBehaviour
 {
-    public Rigidbody rb;
-    public BoxCollider coll;
+    public Rigidbody rigidBody;
+    public new BoxCollider collider;
     public Transform player, container, fpsCam;
 
     public float pickUpRange;
@@ -18,13 +18,13 @@ public class PickUpItem : MonoBehaviour
     {
         if (!equipped)
         {
-            rb.isKinematic = false;
-            coll.isTrigger = false;
+            rigidBody.isKinematic = false;
+            collider.isTrigger = false;
         }
         if (equipped)
         {
-            rb.isKinematic = true;
-            coll.isTrigger = true;
+            rigidBody.isKinematic = true;
+            collider.isTrigger = true;
             slotFull = true;
         }
     }
@@ -50,16 +50,16 @@ public class PickUpItem : MonoBehaviour
         equipped = true;
         slotFull = true;
 
-        //Make weapon child of camera
+        //Make item child of camera
         transform.SetParent(container);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
         transform.localScale = Vector3.one;
 
         //Enable kinematic RigidBody and make BoxCollider a trigger
-        rb.isKinematic = true;
-        coll.isTrigger = true;
-        rb.freezeRotation = true;
+        rigidBody.isKinematic = true;
+        collider.isTrigger = true;
+        rigidBody.freezeRotation = true;
     }
 
     private void Drop()
@@ -71,15 +71,15 @@ public class PickUpItem : MonoBehaviour
         transform.SetParent(null);
 
         //Object has same momentum with player
-        rb.velocity = player.GetComponent<Rigidbody>().velocity;
+        rigidBody.velocity = player.GetComponent<Rigidbody>().velocity;
 
         //AddForce
-        rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
-        rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
+        rigidBody.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
+        rigidBody.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
 
         //Disable kinematic RigidBody and make BoxCollider normal
-        rb.isKinematic = false;
-        coll.isTrigger = false;
-        rb.freezeRotation = false;
+        rigidBody.isKinematic = false;
+        collider.isTrigger = false;
+        rigidBody.freezeRotation = false;
     }
 }

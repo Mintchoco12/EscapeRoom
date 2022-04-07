@@ -6,38 +6,29 @@ public class Animations : MonoBehaviour
 {       
     [SerializeField] private Manager manager;
     [SerializeField] private GameObject interactable;
-    [SerializeField] private GameObject textToDisplay;
 
     private bool playerInZone;
     
     private void Start()
     {
         playerInZone = false;
-        textToDisplay.SetActive(false);
     }
 
     private void Update()
     {
-        //Open door
-        if (playerInZone && manager.stage[2] && Input.GetKeyDown(KeyCode.E))
+        //Move bookshelf
+        if (playerInZone && manager.amphoraInHand && Input.GetMouseButton(1))
         {
-            gameObject.GetComponent<Animator>().Play("Button");
-            StartCoroutine(OpenDoor());
+            manager.amphoraInPlace = true;
+            manager.amphoraInHand = false;
+            StartCoroutine(MoveBookshelf());
         }
 
         //Open lock
-        if (playerInZone && Input.GetMouseButtonDown(0))
+        if (playerInZone && manager.keyInHand && Input.GetMouseButtonDown(0))
         {
             manager.UnlockLock();
-            print("test");
         }
-
-        ////Open lock
-        //if (playerInZone && manager.keyInHand && Input.GetMouseButtonDown(0))
-        //{
-        //    manager.UnlockLock();
-        //    print("test");
-        //}
 
         //Open first chest
         if (playerInZone && manager.stage[1] && Input.GetKeyDown(KeyCode.E))
@@ -50,7 +41,7 @@ public class Animations : MonoBehaviour
         if (playerInZone && manager.stage[2] && Input.GetKeyDown(KeyCode.E))
         {
             gameObject.GetComponent<Animator>().Play("lever");  
-            interactable.GetComponent<Animator>().Play("Bookshelf");
+            StartCoroutine(OpenDoor());
         }
 
         ////Parkour lever
@@ -62,6 +53,13 @@ public class Animations : MonoBehaviour
         //    StartCoroutine(SpawnPlatforms());
 
         //}
+    }
+
+    private IEnumerator MoveBookshelf()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        interactable.GetComponent<Animator>().Play("Bookshelf");
     }
 
     private IEnumerator OpenDoor()
@@ -85,7 +83,6 @@ public class Animations : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             //Show text
-            textToDisplay.SetActive(true);
             playerInZone = true;
         }
     }
@@ -97,7 +94,6 @@ public class Animations : MonoBehaviour
         {
             //Disable text
             playerInZone = false;
-            textToDisplay.SetActive(false);
         }
     }
 }
