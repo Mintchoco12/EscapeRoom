@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Amphora
   - Key
+  - Lava
   layers:
   - Default
   - TransparentFX

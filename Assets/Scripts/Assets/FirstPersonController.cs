@@ -240,6 +240,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
 
+
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
             Rigidbody body = hit.collider.attachedRigidbody;
@@ -256,4 +257,5 @@ namespace UnityStandardAssets.Characters.FirstPerson
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
     }
+
 }
