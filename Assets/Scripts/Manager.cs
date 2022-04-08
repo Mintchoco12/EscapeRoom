@@ -7,6 +7,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private string amphoraTag = "Amphora";
     [SerializeField] private string keyTag = "Key";
     [SerializeField] private GameObject amphora;
+    [SerializeField] private PickUpItem pickUp;
 
     public List<GameObject> chestGameobjects = new List<GameObject>();
     public List<bool> stage = new List<bool>();
@@ -69,22 +70,25 @@ public class Manager : MonoBehaviour
         {
             amphora.transform.position = new Vector3(1.2f, 10.85f, -5.55f);
             amphora.transform.eulerAngles = Vector3.up * 90;
+            pickUp.Drop();
+            stage[2] = true;
         }
     }
 
     public void UnlockLock()
     {
+        pickUp.Drop();
         Destroy(chestGameobjects[1]);
         Destroy(chestGameobjects[2]);
-        //keyInHand = false;
+        keyInHand = false;
         chestUnlocked = true;
-        stage[1] = true;
+        stage[0] = true;
     }
 
     public IEnumerator OpenChest()
     {
         yield return new WaitForSeconds(1);
 
-        stage[2] = true;
+        stage[1] = true;
     }
 }

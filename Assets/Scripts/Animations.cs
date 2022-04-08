@@ -17,7 +17,9 @@ public class Animations : MonoBehaviour
     private void Update()
     {
         //Move bookshelf
-        if (playerInZone && manager.amphoraInHand && Input.GetMouseButton(1))
+        //if (playerInZone && manager.amphoraInHand && Input.GetMouseButton(1))
+        if (playerInZone && manager.amphoraInHand && Input.GetKeyDown(KeyCode.E))
+
         {
             manager.amphoraInPlace = true;
             manager.amphoraInHand = false;
@@ -31,14 +33,14 @@ public class Animations : MonoBehaviour
         }
 
         //Open first chest
-        if (playerInZone && manager.stage[1] && Input.GetKeyDown(KeyCode.E))
+        if (playerInZone && manager.stage[0] && Input.GetKeyDown(KeyCode.E))
         {
             interactable.GetComponent<Animator>().Play("Chest");
             StartCoroutine(manager.OpenChest());
         }
 
         //Bookshelf lever
-        if (playerInZone && manager.stage[2] && Input.GetKeyDown(KeyCode.E))
+        if (playerInZone && manager.stage[1] && manager.stage[2] && Input.GetKeyDown(KeyCode.E))
         {
             gameObject.GetComponent<Animator>().Play("lever");  
             StartCoroutine(OpenDoor());

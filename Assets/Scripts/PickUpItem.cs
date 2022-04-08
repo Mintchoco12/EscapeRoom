@@ -62,7 +62,7 @@ public class PickUpItem : MonoBehaviour
         rigidBody.freezeRotation = true;
     }
 
-    private void Drop()
+    public void Drop()
     {
         equipped = false;
         slotFull = false;
