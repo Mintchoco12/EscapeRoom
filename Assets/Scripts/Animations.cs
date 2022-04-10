@@ -47,14 +47,14 @@ public class Animations : MonoBehaviour
         }
 
         //Parkour lever
-        if (playerInZone && manager.leverOn == false && Input.GetKeyDown(KeyCode.E))
-        {
-            //gameObject.GetComponent<AudioSource>().Play();
-            gameObject.GetComponent<Animator>().Play("lever");
-            manager.leverOn = true;
-            StartCoroutine(SpawnPlatforms());
+        //if (playerInZone && manager.leverOn == false && Input.GetKeyDown(KeyCode.E))
+        //{
+        //    //gameObject.GetComponent<AudioSource>().Play();
+        //    gameObject.GetComponent<Animator>().Play("lever");
+        //    manager.leverOn = true;
+        //    StartCoroutine(SpawnPlatforms());
 
-        }
+        //}
     }
 
     private IEnumerator MoveBookshelf()
