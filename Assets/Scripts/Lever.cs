@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI
 
-public class Lever1 : MonoBehaviour
+public class Lever : MonoBehaviour
 {
-    public GameObject txtToDisplay;             //display the UI text
+    [SerializeField] private Manager manager;
 
-    private bool PlayerInZone;                  //check if the player is in trigger
+    private bool PlayerInZone;           
 
     public GameObject block;
     public GameObject block1;
@@ -17,18 +16,17 @@ public class Lever1 : MonoBehaviour
     private void Start()
     {
         leverOn = false;
-        PlayerInZone = false;                   //player not in zone       
-        txtToDisplay.SetActive(false);
+        PlayerInZone = false;              
     }
 
     private void Update()
     {
-        if (PlayerInZone && leverOn == false && Input.GetKeyDown(KeyCode.E))           //if in zone and press F key
+        //If player is in zone of lever and e is pressed
+        if (PlayerInZone && leverOn == false && Input.GetKeyDown(KeyCode.E))           
         {
+            leverOn = true;
             gameObject.GetComponent<AudioSource>().Play();
             gameObject.GetComponent<Animator>().Play("lever");
-            leverOn = true;
-            txtToDisplay.SetActive(false);
             StartCoroutine(SpawnBridge());
             StartCoroutine(DestroyWall());
         }
@@ -36,39 +34,37 @@ public class Lever1 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")     //if player in zone
+        //Detects the player
+        if (other.gameObject.tag == "Player")    
         {
-            txtToDisplay.SetActive(true);
             PlayerInZone = true;
         }
     }
 
-
-    private void OnTriggerExit(Collider other)     //if player exit zone
+    private void OnTriggerExit(Collider other)     
     {
+        //Detects the player
         if (other.gameObject.tag == "Player")
         {
             PlayerInZone = false;
-            txtToDisplay.SetActive(false);
         }
     }
+
     IEnumerator SpawnBridge()
     {
         yield return new WaitForSeconds(0.8f);
 
-        //Quit game when lever is pressed
+        //Spawn platform when lever is pulled
         block.SetActive(!block.activeSelf);
-
-
+        manager.stage[4] = true;
     }
+
     IEnumerator DestroyWall()
     {
         yield return new WaitForSeconds(0.8f);
 
-        //Quit game when lever is pressed
+        //Destroy wall when lever is pulled
         block1.SetActive(false);
-
-
     }
 
 }

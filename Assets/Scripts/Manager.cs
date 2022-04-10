@@ -9,15 +9,13 @@ public class Manager : MonoBehaviour
     [SerializeField] private GameObject amphora;
     [SerializeField] private PickUpItem pickUp;
 
-    public List<GameObject> chestGameobjects = new List<GameObject>();
     public List<bool> stage = new List<bool>();
-    public GameObject block;
+    public List<GameObject> chestGameobjects = new List<GameObject>();
 
     public bool chestUnlocked;
-    public bool leverOn;
 
-    public bool amphoraInHand;
     public bool keyInHand;
+    public bool amphoraInHand;
     public bool amphoraInPlace;
 
     private Transform _selection;
@@ -28,7 +26,6 @@ public class Manager : MonoBehaviour
         {
             stage[i] = false;
         }
-        leverOn = false;
         chestUnlocked = false;
 
         amphoraInHand = false;
@@ -38,6 +35,7 @@ public class Manager : MonoBehaviour
 
     private void Update()
     {
+        //Raycast for selecting objects
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
@@ -66,6 +64,7 @@ public class Manager : MonoBehaviour
             }
         }
 
+        //Amphora puzzle that moves the bookshelf when completed
         if (amphoraInPlace)
         {
             amphora.transform.position = new Vector3(1.2f, 10.85f, -5.55f);
@@ -75,6 +74,7 @@ public class Manager : MonoBehaviour
         }
     }
 
+    //Unlocks the lock on the chest
     public void UnlockLock()
     {
         pickUp.Drop();
@@ -85,6 +85,7 @@ public class Manager : MonoBehaviour
         stage[0] = true;
     }
 
+    //Coroutine for opening chest
     public IEnumerator OpenChest()
     {
         yield return new WaitForSeconds(1);

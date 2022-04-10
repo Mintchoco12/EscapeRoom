@@ -45,6 +45,7 @@ public class PickUpItem : MonoBehaviour
         }
     }
 
+    //Picks up interactables
     private void PickUp()
     {
         equipped = true;
@@ -62,6 +63,7 @@ public class PickUpItem : MonoBehaviour
         rigidBody.freezeRotation = true;
     }
 
+    //Drops interactables
     public void Drop()
     {
         equipped = false;

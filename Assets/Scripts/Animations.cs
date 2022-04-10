@@ -17,9 +17,7 @@ public class Animations : MonoBehaviour
     private void Update()
     {
         //Move bookshelf
-        //if (playerInZone && manager.amphoraInHand && Input.GetMouseButton(1))
         if (playerInZone && manager.amphoraInHand && Input.GetKeyDown(KeyCode.E))
-
         {
             manager.amphoraInPlace = true;
             manager.amphoraInHand = false;
@@ -42,21 +40,20 @@ public class Animations : MonoBehaviour
         //Bookshelf lever
         if (playerInZone && manager.stage[1] && manager.stage[2] && Input.GetKeyDown(KeyCode.E))
         {
-            gameObject.GetComponent<Animator>().Play("lever");  
+            gameObject.GetComponent<Animator>().Play("lever");
             StartCoroutine(OpenDoor());
         }
 
-        //Parkour lever
-        //if (playerInZone && manager.leverOn == false && Input.GetKeyDown(KeyCode.E))
-        //{
-        //    //gameObject.GetComponent<AudioSource>().Play();
-        //    gameObject.GetComponent<Animator>().Play("lever");
-        //    manager.leverOn = true;
-        //    StartCoroutine(SpawnPlatforms());
+        //End lever
+        if (playerInZone && manager.stage[4] && Input.GetKeyDown(KeyCode.E))
+        {
+            gameObject.GetComponent<Animator>().Play("lever");
+            StartCoroutine(QuitGame());
+        }
 
-        //}
     }
 
+    //Coroutine for moving bookshelf
     private IEnumerator MoveBookshelf()
     {
         yield return new WaitForSeconds(0.5f);
@@ -64,37 +61,40 @@ public class Animations : MonoBehaviour
         interactable.GetComponent<Animator>().Play("Bookshelf");
     }
 
+    //Coroutine for opening door
     private IEnumerator OpenDoor()
     {
         yield return new WaitForSeconds(0.5f);
 
         interactable.GetComponent<Animator>().Play("Door");
+        manager.stage[3] = true;
     }
 
-    private IEnumerator SpawnPlatforms()
+    //Coroutine for quitting game
+    IEnumerator QuitGame()
     {
-        yield return new WaitForSeconds(0.5f);
+        //Wait for lever animation to play before quitting
+        yield return new WaitForSeconds(0.8f);
 
-        manager.block.SetActive(!manager.block.activeSelf);
-
+        //Quit game when lever is pressed
+        Application.Quit();
+        print("Game closed");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //If player is in zone
+        //Detects the player
         if (other.gameObject.tag == "Player")
         {
-            //Show text
             playerInZone = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //If player exits zone
+        //Detects the player
         if (other.gameObject.tag == "Player")
         {
-            //Disable text
             playerInZone = false;
         }
     }
